@@ -1,0 +1,6 @@
+{
+  "name": "DMI OCMS - Online Complaint Management System",
+  "description": "Production-grade Online Complaint Management System for DMI College of Engineering with RBAC, automated SLA tracking, verified workflows, and audit logging.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

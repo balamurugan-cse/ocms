@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <!-- Rich Metallic Gradients -->
+    <linearGradient id="dmiGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="18%" stop-color="#fef08a"/>
+      <stop offset="45%" stop-color="#f59e0b"/>
+      <stop offset="78%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </linearGradient>
+    <linearGradient id="dmiNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#051329"/>
+      <stop offset="35%" stop-color="#0c2552"/>
+      <stop offset="70%" stop-color="#143a75"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="crossGoldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="20%" stop-color="#fef08a"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#b91c1c"/>
+      <stop offset="25%" stop-color="#ea580c"/>
+      <stop offset="65%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <radialGradient id="centerBgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+    <radialGradient id="crossAura" cx="50%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.65"/>
+      <stop offset="45%" stop-color="#fde047" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="crestShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#030712" flood-opacity="0.25"/>
+    </filter>
+
+    <!-- Precision Arc Paths for Circular Text -->
+    <!-- Top Arc: runs clockwise from left (66, 250) to right (434, 250) - radius 184 -->
+    <path id="crestTopArc" d="M 66,250 A 184,184 0 0,1 434,250" fill="none"/>
+    <!-- Bottom Arc: runs counter-clockwise from left (78, 250) to right (422, 250) - radius 172 -->
+    <path id="crestBottomArc" d="M 78,250 A 172,172 0 0,0 422,250" fill="none"/>
+  </defs>
+
+  <!-- Outer Deep Navy Circle Base with Shadow -->
+  <circle cx="250" cy="250" r="246" fill="url(#dmiNavyGrad)" filter="url(#crestShadow)"/>
+
+  <!-- Outer Triple Polished Gold Concentric Borders -->
+  <circle cx="250" cy="250" r="242" fill="none" stroke="url(#dmiGoldGrad)" stroke-width="4.5"/>
+  <circle cx="250" cy="250" r="237" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <circle cx="250" cy="250" r="233" fill="none" stroke="url(#dmiGoldGrad)" stroke-width="1.5" opacity="0.75"/>
+
+  <!-- Beaded Accent Ring for Official Seal Prestige -->
+  <circle cx="250" cy="250" r="228" fill="none" stroke="#fde047" stroke-width="1.6" stroke-dasharray="1.5 5.5" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Inner Core Background Circle -->
+  <circle cx="250" cy="250" r="158" fill="url(#centerBgGlow)" stroke="url(#dmiGoldGrad)" stroke-width="5"/>
+  <circle cx="250" cy="250" r="153" fill="none" stroke="#1e3a8a" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- TOP ARCUATE TEXT: DMI COLLEGE OF ENGINEERING -->
+  <text font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="23" fill="#ffffff" letter-spacing="3.2">
+    <textPath href="#crestTopArc" startOffset="50%" text-anchor="middle">
+      DMI COLLEGE OF ENGINEERING
+    </textPath>
+  </text>
+
+  <!-- Flanking Golden Stars (East & West) -->
+  <g transform="translate(54, 250)">
+    <polygon points="0,-10 3,-3 10,-3 4.5,2 7,9 0,4.5 -7,9 -4.5,2 -10,-3 -3,-3" fill="url(#dmiGoldGrad)"/>
+  </g>
+  <g transform="translate(446, 250)">
+    <polygon points="0,-10 3,-3 10,-3 4.5,2 7,9 0,4.5 -7,9 -4.5,2 -10,-3 -3,-3" fill="url(#dmiGoldGrad)"/>
+  </g>
+
+  <!-- BOTTOM ARCUATE TEXT: PALANCHUR, CHENNAI • ESTD 2001 (Upright & Clean) -->
+  <text font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="17.5" fill="#fef08a" letter-spacing="2.2">
+    <textPath href="#crestBottomArc" startOffset="50%" text-anchor="middle">
+      PALANCHUR, CHENNAI • ESTD 2001
+    </textPath>
+  </text>
+
+  <!-- ================= CENTER EMBLEM ARTWORK ================= -->
+
+  <!-- Radiant Light Rays / Cross Aura -->
+  <circle cx="250" cy="185" r="68" fill="url(#crossAura)"/>
+  <g stroke="url(#dmiGoldGrad)" stroke-width="1.2" opacity="0.45" stroke-linecap="round">
+    <line x1="250" y1="120" x2="250" y2="136"/>
+    <line x1="250" y1="250" x2="250" y2="234"/>
+    <line x1="185" y1="185" x2="201" y2="185"/>
+    <line x1="315" y1="185" x2="299" y2="185"/>
+    <line x1="204" y1="139" x2="216" y2="151"/>
+    <line x1="296" y1="139" x2="284" y2="151"/>
+    <line x1="204" y1="231" x2="216" y2="219"/>
+    <line x1="296" y1="231" x2="284" y2="219"/>
+  </g>
+
+  <!-- TERRESTRIAL GLOBE / COORDINATE GRID (Centre of Life for DMI) -->
+  <g id="dmiGlobe" transform="translate(250, 192)">
+    <circle cx="0" cy="0" r="50" fill="#f0fdf4" stroke="#93c5fd" stroke-width="1" opacity="0.75"/>
+    <!-- Meridians & Parallels -->
+    <ellipse cx="0" cy="0" rx="25" ry="50" fill="none" stroke="#93c5fd" stroke-width="0.8" opacity="0.6"/>
+    <line x1="0" y1="-50" x2="0" y2="50" stroke="#93c5fd" stroke-width="0.8" opacity="0.6"/>
+    <line x1="-50" y1="0" x2="50" y2="0" stroke="#93c5fd" stroke-width="0.8" opacity="0.6"/>
+    <ellipse cx="0" cy="-19" rx="46" ry="8" fill="none" stroke="#93c5fd" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 2"/>
+    <ellipse cx="0" cy="19" rx="46" ry="8" fill="none" stroke="#93c5fd" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 2"/>
+  </g>
+
+  <!-- ENGINEERING GEAR / COGWHEEL (Encircling Upper Center) -->
+  <g id="engineeringGear" transform="translate(250, 185)">
+    <g fill="#1e3a8a">
+      <rect x="-9" y="-65" width="18" height="14" rx="3"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(30)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(60)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(90)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(120)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(150)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(180)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(210)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(240)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(270)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(300)"/>
+      <rect x="-9" y="-65" width="18" height="14" rx="3" transform="rotate(330)"/>
+      <circle cx="0" cy="0" r="55" fill="#1e3a8a"/>
+    </g>
+    <!-- Gear Rim Inner Gold Ring -->
+    <circle cx="0" cy="0" r="44" fill="#ffffff" stroke="url(#dmiGoldGrad)" stroke-width="2.5"/>
+  </g>
+
+  <!-- CENTRAL SACRED CROSS (Centre of Life & Spiritual Foundation) -->
+  <g id="dmiCross" transform="translate(250, 182)">
+    <!-- Cross Shadow -->
+    <rect x="-8" y="-49" width="16" height="73" rx="2" fill="#0f172a" opacity="0.2"/>
+    <rect x="-29" y="-31" width="58" height="16" rx="2" fill="#0f172a" opacity="0.2"/>
+    <!-- Cross Body -->
+    <rect x="-7" y="-51" width="14" height="73" rx="2" fill="url(#crossGoldGrad)" stroke="#b45309" stroke-width="1.2"/>
+    <rect x="-27" y="-33" width="54" height="14" rx="2" fill="url(#crossGoldGrad)" stroke="#b45309" stroke-width="1.2"/>
+    <!-- Cross Inner Highlights -->
+    <rect x="-3" y="-49" width="6" height="69" fill="#ffffff" opacity="0.6"/>
+    <rect x="-25" y="-31" width="50" height="6" fill="#ffffff" opacity="0.6"/>
+    <!-- Cross Core Medallion -->
+    <circle cx="0" cy="-26" r="4.5" fill="#ffffff" stroke="#d97706" stroke-width="1.2"/>
+  </g>
+
+  <!-- THREE SOARING ARCTIC TERNS / BIRDS OF THE SUN (DMI Spirit) -->
+  <!-- Left Ascending Bird -->
+  <g transform="translate(196, 154) scale(0.7) rotate(-22)">
+    <path d="M 0,0 C 8,-14 26,-16 32,-9 C 23,-3 14,0 0,0 Z" fill="#ffffff" stroke="#1e3a8a" stroke-width="1"/>
+    <path d="M 0,0 C 11,-4 24,3 28,11 C 19,9 10,5 0,0 Z" fill="#f8fafc" stroke="#1e3a8a" stroke-width="0.8"/>
+  </g>
+  <!-- Right Ascending Bird -->
+  <g transform="translate(304, 154) scale(-0.7, 0.7) rotate(-22)">
+    <path d="M 0,0 C 8,-14 26,-16 32,-9 C 23,-3 14,0 0,0 Z" fill="#ffffff" stroke="#1e3a8a" stroke-width="1"/>
+    <path d="M 0,0 C 11,-4 24,3 28,11 C 19,9 10,5 0,0 Z" fill="#f8fafc" stroke="#1e3a8a" stroke-width="0.8"/>
+  </g>
+  <!-- Zenith Ascending Bird -->
+  <g transform="translate(250, 127) scale(0.6)">
+    <path d="M 0,7 C -14,-9 -28,-7 -32,0 C -22,2 -11,5 0,7 C 11,5 22,2 32,0 C 28,-7 14,-9 0,7 Z" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.1"/>
+  </g>
+
+  <!-- LAUREL & OLIVE BRANCH (Peace & Academic Distinction) -->
+  <g stroke="none">
+    <!-- Left Branch -->
+    <g transform="translate(142, 230)">
+      <path d="M 0,0 C -6,-15 -20,-20 -28,-18 C -22,-8 -12,-2 0,0 Z" fill="#15803d"/>
+      <circle cx="-14" cy="-10" r="2.5" fill="#eab308"/>
+      <path d="M 6,18 C -2,6 -16,4 -24,8 C -16,16 -6,20 6,18 Z" fill="#16a34a"/>
+      <circle cx="-8" cy="10" r="2.5" fill="#eab308"/>
+      <path d="M 12,38 C 2,28 -12,28 -20,34 C -10,40 -2,42 12,38 Z" fill="#15803d"/>
+      <circle cx="-4" cy="32" r="2.5" fill="#eab308"/>
+      <path d="M 18,58 C 8,50 -4,52 -12,60 C -2,64 6,64 18,58 Z" fill="#16a34a"/>
+      <path d="M 26,76 C 18,68 8,72 2,82 C 12,84 20,82 26,76 Z" fill="#15803d"/>
+    </g>
+    <!-- Right Branch -->
+    <g transform="translate(358, 230) scale(-1, 1)">
+      <path d="M 0,0 C -6,-15 -20,-20 -28,-18 C -22,-8 -12,-2 0,0 Z" fill="#15803d"/>
+      <circle cx="-14" cy="-10" r="2.5" fill="#eab308"/>
+      <path d="M 6,18 C -2,6 -16,4 -24,8 C -16,16 -6,20 6,18 Z" fill="#16a34a"/>
+      <circle cx="-8" cy="10" r="2.5" fill="#eab308"/>
+      <path d="M 12,38 C 2,28 -12,28 -20,34 C -10,40 -2,42 12,38 Z" fill="#15803d"/>
+      <circle cx="-4" cy="32" r="2.5" fill="#eab308"/>
+      <path d="M 18,58 C 8,50 -4,52 -12,60 C -2,64 6,64 18,58 Z" fill="#16a34a"/>
+      <path d="M 26,76 C 18,68 8,72 2,82 C 12,84 20,82 26,76 Z" fill="#15803d"/>
+    </g>
+  </g>
+
+  <!-- OPEN BOOK OF KNOWLEDGE (Academic Eminence) -->
+  <g id="openBook" transform="translate(250, 272)">
+    <path d="M -68,16 Q -35,-2 0,8 Q 35,-2 68,16 L 62,38 Q 32,22 0,28 Q -32,22 -62,38 Z" fill="#0f172a" opacity="0.15"/>
+    <path d="M -66,12 Q -34,-4 0,6 Q 34,-4 66,12 L 60,34 Q 30,18 0,24 Q -30,18 -60,34 Z" fill="#1e3a8a"/>
+    <!-- Left Page Group -->
+    <path d="M -64,9 Q -34,-7 -2,3 L -2,22 Q -32,12 -58,28 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <path d="M -60,6 Q -32,-9 -4,1 L -4,19 Q -32,10 -55,24 Z" fill="#f8fafc"/>
+    <line x1="-50" y1="5" x2="-14" y2="0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-50" y1="10" x2="-14" y2="5" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-48" y1="15" x2="-18" y2="10" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+    <!-- Right Page Group -->
+    <path d="M 64,9 Q 34,-7 2,3 L 2,22 Q 32,12 58,28 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <path d="M 60,6 Q 32,-9 4,1 L 4,19 Q 32,10 55,24 Z" fill="#f8fafc"/>
+    <line x1="14" y1="0" x2="50" y2="5" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="14" y1="5" x2="50" y2="10" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="18" y1="10" x2="48" y2="15" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+    <!-- Gold Center Spine -->
+    <line x1="0" y1="4" x2="0" y2="25" stroke="#d97706" stroke-width="3"/>
+    <polygon points="0,23 -4,34 0,31 4,34" fill="#d97706"/>
+  </g>
+
+  <!-- DIYA LAMP & RADIANT FLAME (Wisdom & Truth) -->
+  <g id="lampOfWisdom" transform="translate(250, 238)">
+    <path d="M -16,14 L 16,14 L 10,21 L -10,21 Z" fill="url(#dmiGoldGrad)"/>
+    <path d="M -5,14 L -3,6 L 3,6 L 5,14 Z" fill="url(#dmiGoldGrad)"/>
+    <path d="M -22,6 C -20,1 -8,-3 0,-1 C 8,-3 20,1 22,6 C 22,11 12,13 0,13 C -12,13 -22,11 -22,6 Z" fill="url(#dmiGoldGrad)" stroke="#b45309" stroke-width="1"/>
+    <!-- Flame of Knowledge -->
+    <ellipse cx="0" cy="-12" rx="14" ry="20" fill="#f97316" opacity="0.25"/>
+    <path d="M 0,-30 C 7,-18 8,-8 6,-3 C 4,2 -4,2 -6,-3 C -8,-8 -7,-18 0,-30 Z" fill="url(#flameGrad)"/>
+    <path d="M 0,-22 C 3.5,-14 4,-7 3,-3 C 1.5,0 -1.5,0 -3,-3 C -4,-7 -3.5,-14 0,-22 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- BOLD DMI INITIALS CENTER BADGE -->
+  <g transform="translate(250, 324)">
+    <rect x="-68" y="-17" width="136" height="34" rx="17" fill="url(#dmiNavyGrad)" stroke="url(#dmiGoldGrad)" stroke-width="2.5"/>
+    <text x="0" y="6.5" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" fill="#ffffff" text-anchor="middle" letter-spacing="3.5">
+      DMI
+    </text>
+  </g>
+
+  <!-- MOTTO SCROLL BANNER: FULLY HUMAN & FULLY ALIVE -->
+  <g id="mottoBanner" transform="translate(250, 366)">
+    <path d="M -115,8 L 115,8 L 105,24 L -105,24 Z" fill="#0f172a" opacity="0.15"/>
+    <!-- Banner Ribbons Tails -->
+    <path d="M -118,5 L -95,-4 L -95,16 L -118,25 L -108,15 Z" fill="#b45309"/>
+    <path d="M 118,5 L 95,-4 L 95,16 L 118,25 L 108,15 Z" fill="#b45309"/>
+    <!-- Main Banner Body -->
+    <path d="M -102,-6 Q 0,-12 102,-6 L 98,16 Q 0,10 -98,16 Z" fill="url(#dmiGoldGrad)" stroke="#78350f" stroke-width="1.2"/>
+    <text x="0" y="8" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="10.5" fill="#0f172a" text-anchor="middle" letter-spacing="1.2">
+      FULLY HUMAN &amp; FULLY ALIVE
+    </text>
+  </g>
+</svg>
