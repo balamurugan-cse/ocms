@@ -37,7 +37,14 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   }
 
   if (!response.ok) {
-    const errorMsg = data?.error || data?.message || 'Server error occurred.';
+    let errorMsg = 'Server error occurred.';
+    if (typeof data === 'object' && data !== null) {
+      errorMsg = data.error || data.message || `Request failed with status ${response.status}`;
+    } else if (typeof data === 'string' && data.length > 0 && !data.startsWith('<!doctype')) {
+      errorMsg = data;
+    } else {
+      errorMsg = `Request failed (${response.status} ${response.statusText || 'Error'})`;
+    }
     const error: any = new Error(errorMsg);
     error.status = response.status;
     error.data = data;

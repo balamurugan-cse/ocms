@@ -133,6 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             Redressal Charter
           </button>
+
         </nav>
 
         {/* Zone 3: 1 Primary Action / User Profile */}
@@ -229,6 +230,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <UserCheck className="w-3.5 h-3.5 text-blue-900" />
                       <span>Workspace Dashboard</span>
                     </button>
+
+
 
 
 

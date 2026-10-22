@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DMI OCMS - System Architecture & DFD Project Report</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/dmi-emblem.svg">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #0f172a;
+      --accent: #d97706;
+      --border: #e2e8f0;
+      --bg-alt: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      background: #f1f5f9;
+      padding: 24px;
+    }
+
+    .report-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      padding: 48px;
+    }
+
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #172554;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #334155;
+    }
+    .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+
+    .header-block {
+      text-align: center;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 28px;
+      margin-bottom: 36px;
+    }
+
+    .college-crest {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 12px;
+    }
+
+    .college-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .sub-head {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .report-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--secondary);
+      margin-top: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .meta-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .meta-item label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+    .meta-item span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-top: 36px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    p {
+      font-size: 13px;
+      color: #334155;
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin: 16px 0;
+    }
+
+    th {
+      background: var(--secondary);
+      color: white;
+      text-align: left;
+      padding: 10px;
+      font-weight: 700;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:nth-child(even) {
+      background: var(--bg-alt);
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #be123c;
+    }
+
+    .diagram-container {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .diagram-container svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .action-bar {
+        display: none !important;
+      }
+      .report-card {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      h2 {
+        page-break-after: avoid;
+      }
+      table, .diagram-container {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="report-card">
+    <!-- Action Bar (Hidden when printed to PDF) -->
+    <div class="action-bar">
+      <div>
+        <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #1e3a8a; background: #dbeafe; padding: 4px 8px; border-radius: 4px;">
+          Project Report Format
+        </span>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-primary" onclick="window.print()">
+          🖨️ Print / Save as PDF
+        </button>
+        <a class="btn btn-secondary" href="/DMI_OCMS_ARCHITECTURE_REPORT.md" download="DMI_OCMS_ARCHITECTURE_REPORT.md">
+          ⬇️ Download Markdown (.md)
+        </a>
+      </div>
+    </div>
+
+    <!-- Institutional Title Header -->
+    <div class="header-block">
+      <img src="/assets/dmi-emblem.svg" alt="DMI Crest" class="college-crest">
+      <div class="college-name">DMI College of Engineering • Palanchur, Chennai - 600 123</div>
+      <div class="sub-head">(Approved by AICTE, New Delhi & Affiliated to Anna University, Chennai)</div>
+      <h1 class="report-title">ONLINE COMPLAINT MANAGEMENT SYSTEM (OCMS)</h1>
+      <div style="font-size: 13px; font-weight: 700; color: #2563eb; margin-top: 6px;">
+        System Architecture & Data Flow Diagram (DFD) Engineering Report
+      </div>
+
+      <div class="meta-box">
+        <div class="meta-item">
+          <label>Document Code</label>
+          <span>DMI-OCMS-SAD-2026-V1</span>
+        </div>
+        <div class="meta-item">
+          <label>Architecture Pattern</label>
+          <span>3-Tier Client-Server</span>
+        </div>
+        <div class="meta-item">
+          <label>Academic Year</label>
+          <span>2026 – 2027</span>
+        </div>
+        <div class="meta-item">
+          <label>Application Type</label>
+          <span>Web Single Page App (SPA)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Executive Abstract -->
+    <h2>1. Executive Summary & Problem Formulation</h2>
+    <p>
+      The <strong>DMI Online Complaint Management System (OCMS)</strong> provides a unified, transparent, and auditable digital grievance redressal mechanism for <strong>DMI College of Engineering</strong>. Designed in strict compliance with AICTE grievance redressal regulations and Anna University guidelines, the system replaces manual complaint handling with automated ticket issuance, department routing, SLA countdown monitoring, leadership escalation, and evidence-verified resolution.
+    </p>
+
+    <!-- 2. 3-Tier Layered Architecture -->
+    <h2>2. 3-Tier Layered Architecture</h2>
+    <p>
+      The system is architected in three distinct tiers separating presentation, business logic execution, and data persistence:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Layer Name</th>
+          <th>Technology Stack</th>
+          <th>Functional Responsibilities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tier 1</strong></td>
+          <td>Presentation Layer</td>
+          <td>React 19, TypeScript, Tailwind CSS, Vite</td>
+          <td>Responsive user interfaces, role-specific dashboards, public ticket tracking, grievance submission forms, interactive timelines.</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 2</strong></td>
+          <td>Application & Logic Layer</td>
+          <td>Node.js, Express, JWT, FSM Engine</td>
+          <td>Authentication verification, state machine validation, SLA countdown watcher, automated escalation triggers, email dispatching.</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 3</strong></td>
+          <td>Data Persistence Layer</td>
+          <td>JSON Store / Relational Schema, Multer Vault</td>
+          <td>Atomically locked user records, grievance entries, append-only immutable audit logs, photographic and PDF evidence attachments.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 3. DFD Level 0 (Context Level Diagram) -->
+    <h2>3. Data Flow Diagram (DFD) — Level 0: Context Diagram</h2>
+    <p>
+      The Context-Level DFD models the entire DMI OCMS as a single process (Process 0.0) interacting with Complainants, Grievance Officers, Administrators, and the Notification Gateway:
+    </p>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 800 440" style="width:100%; height:auto;">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e3a8a" />
+          </marker>
+        </defs>
+
+        <!-- Center Process -->
+        <circle cx="400" cy="220" r="90" fill="#eff6ff" stroke="#1e3a8a" stroke-width="3" />
+        <text x="400" y="205" text-anchor="middle" fill="#1e3a8a" font-weight="bold" font-size="12">PROCESS 0.0</text>
+        <text x="400" y="225" text-anchor="middle" fill="#0f172a" font-weight="900" font-size="14">DMI ONLINE COMPLAINT</text>
+        <text x="400" y="245" text-anchor="middle" fill="#0f172a" font-weight="900" font-size="14">MANAGEMENT SYSTEM</text>
+        <text x="400" y="265" text-anchor="middle" fill="#2563eb" font-weight="600" font-size="11">(OCMS CORE)</text>
+
+        <!-- Complainant -->
+        <rect x="40" y="50" width="160" height="70" rx="8" fill="#ffffff" stroke="#1e3a8a" stroke-width="2" />
+        <rect x="40" y="50" width="160" height="22" rx="8" fill="#1e3a8a" />
+        <text x="120" y="65" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="11">EXTERNAL ENTITY</text>
+        <text x="120" y="90" text-anchor="middle" fill="#0f172a" font-weight="bold" font-size="13">COMPLAINANT</text>
+        <text x="120" y="105" text-anchor="middle" fill="#64748b" font-size="10">Student / Faculty</text>
+        <path d="M 195 90 L 320 170" fill="none" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow)" />
+        <path d="M 315 205 L 195 120" fill="none" stroke="#047857" stroke-width="2" marker-end="url(#arrow)" />
+
+        <!-- Officer -->
+        <rect x="600" y="50" width="160" height="70" rx="8" fill="#ffffff" stroke="#1e3a8a" stroke-width="2" />
+        <rect x="600" y="50" width="160" height="22" rx="8" fill="#1e3a8a" />
+        <text x="680" y="65" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="11">EXTERNAL ENTITY</text>
+        <text x="680" y="90" text-anchor="middle" fill="#0f172a" font-weight="bold" font-size="13">GRIEVANCE OFFICER</text>
+        <text x="680" y="105" text-anchor="middle" fill="#64748b" font-size="10">Dept Coordinator</text>
+        <path d="M 485 170 L 605 90" fill="none" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow)" />
+        <path d="M 605 120 L 485 205" fill="none" stroke="#b45309" stroke-width="2" marker-end="url(#arrow)" />
+
+        <!-- Admin -->
+        <rect x="40" y="320" width="160" height="70" rx="8" fill="#ffffff" stroke="#1e3a8a" stroke-width="2" />
+        <rect x="40" y="320" width="160" height="22" rx="8" fill="#1e3a8a" />
+        <text x="120" y="335" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="11">EXTERNAL ENTITY</text>
+        <text x="120" y="360" text-anchor="middle" fill="#0f172a" font-weight="bold" font-size="13">COLLEGE ADMIN / HOD</text>
+        <text x="120" y="375" text-anchor="middle" fill="#64748b" font-size="10">Principal / Committee</text>
+        <path d="M 325 260 L 195 330" fill="none" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow)" />
+        <path d="M 195 365 L 320 285" fill="none" stroke="#047857" stroke-width="2" marker-end="url(#arrow)" />
+
+        <!-- Mailer -->
+        <rect x="600" y="320" width="160" height="70" rx="8" fill="#ffffff" stroke="#1e3a8a" stroke-width="2" />
+        <rect x="600" y="320" width="160" height="22" rx="8" fill="#1e3a8a" />
+        <text x="680" y="335" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="11">EXTERNAL SERVICE</text>
+        <text x="680" y="360" text-anchor="middle" fill="#0f172a" font-weight="bold" font-size="13">SMTP MAIL GATEWAY</text>
+        <text x="680" y="375" text-anchor="middle" fill="#64748b" font-size="10">Notification Dispatcher</text>
+        <path d="M 475 260 L 605 330" fill="none" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow)" />
+        <path d="M 605 365 L 485 285" fill="none" stroke="#047857" stroke-width="2" marker-end="url(#arrow)" />
+      </svg>
+    </div>
+
+    <!-- 4. DFD Level 1 (Functional Decomposition) -->
+    <h2>4. Data Flow Diagram (DFD) — Level 1: Functional Sub-Processes</h2>
+    <p>
+      Level 1 decomposes the system into seven core functional modules operating over five discrete data stores:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Process</th>
+          <th>Process Title</th>
+          <th>Inputs</th>
+          <th>Interacting Data Stores</th>
+          <th>Outputs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1.0</strong></td>
+          <td>Authentication &amp; RBAC</td>
+          <td>Credentials, OTP token</td>
+          <td><code>[D1] User Store</code>, <code>[D3] Audit Logs</code></td>
+          <td>JWT Bearer token, User profile</td>
+        </tr>
+        <tr>
+          <td><strong>2.0</strong></td>
+          <td>Grievance Lodging &amp; Numbering</td>
+          <td>Category, narrative, proof files</td>
+          <td><code>[D2] Complaint Store</code>, <code>[D5] Outbox</code></td>
+          <td>Ticket <code>DMI-2026-XXXX</code>, Due date</td>
+        </tr>
+        <tr>
+          <td><strong>3.0</strong></td>
+          <td>Triage &amp; Routing</td>
+          <td>Department rule, assigned officer</td>
+          <td><code>[D1] Users</code>, <code>[D2] Complaints</code></td>
+          <td>Status <code>assigned</code>, Officer alert</td>
+        </tr>
+        <tr>
+          <td><strong>4.0</strong></td>
+          <td>Investigation &amp; Clarification</td>
+          <td>Officer remarks, complainant reply</td>
+          <td><code>[D2] Complaints</code>, <code>[D3] Audit</code></td>
+          <td>Status <code>in_progress</code>, Timeline event</td>
+        </tr>
+        <tr>
+          <td><strong>5.0</strong></td>
+          <td>Resolution &amp; Star Rating</td>
+          <td>Remedy report, 1–5 star rating</td>
+          <td><code>[D2] Complaints</code>, <code>[D3] Audit</code></td>
+          <td>Status <code>resolved</code> / <code>closed</code></td>
+        </tr>
+        <tr>
+          <td><strong>6.0</strong></td>
+          <td>SLA Watcher &amp; Auto-Escalation</td>
+          <td>Clock tick, SLA deadline hour</td>
+          <td><code>[D2] Complaints</code>, <code>[D5] Outbox</code></td>
+          <td>Breach flag, Escalation email to HOD</td>
+        </tr>
+        <tr>
+          <td><strong>7.0</strong></td>
+          <td>Institutional Compliance Reports</td>
+          <td>Date and Department filter</td>
+          <td><code>[D2] Complaints</code>, <code>[D4] Depts</code></td>
+          <td>AICTE Redressal KPI summary, CSV export</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 5. Entity Relationship (ER) Schema -->
+    <h2>5. Entity-Relationship (ER) Schema & Data Dictionary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Entity</th>
+          <th>Primary Key</th>
+          <th>Foreign Keys</th>
+          <th>Key Attributes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>users</code></td>
+          <td><code>id (UUID)</code></td>
+          <td><code>departmentId</code></td>
+          <td>name, email (UQ), role, rollNumber, status, emailVerifiedAt</td>
+        </tr>
+        <tr>
+          <td><code>complaints</code></td>
+          <td><code>id (UUID)</code></td>
+          <td><code>createdBy</code>, <code>departmentId</code>, <code>assignedTo</code></td>
+          <td>complaintNumber (UQ), category, subject, description, priority, status, slaHours, dueAt, resolvedAt, resolutionRating</td>
+        </tr>
+        <tr>
+          <td><code>complaint_events</code></td>
+          <td><code>id (UUID)</code></td>
+          <td><code>complaintId</code>, <code>actorId</code></td>
+          <td>eventType, fromStatus, toStatus, publicMessage, internalNote, createdAt</td>
+        </tr>
+        <tr>
+          <td><code>departments</code></td>
+          <td><code>id</code></td>
+          <td>None</td>
+          <td>name, code (UQ), headName, headEmail, slaHoursDefault, categories</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 6. Role Based Access Control (RBAC) -->
+    <h2>6. Role-Based Access Control (RBAC) Matrix</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>System Operation</th>
+          <th>Public</th>
+          <th>Student</th>
+          <th>Faculty</th>
+          <th>Officer</th>
+          <th>Admin / HOD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Track Ticket Status</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>Lodge Formal Grievance</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>Update Lifecycle Status</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅ (Assigned)</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>Internal Officer Notes</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>Submit Satisfaction Star Rating</td>
+          <td>❌</td>
+          <td>✅ (Creator)</td>
+          <td>✅ (Creator)</td>
+          <td>❌</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td>Institutional SLA Audit Reports</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--secondary); display: flex; justify-content: space-between; font-size: 11px; color: #64748b;">
+      <div><strong>DMI College of Engineering</strong> • Institutional Grievance Redressal Cell</div>
+      <div>Palanchur, Chennai - 600 123 • Technical Architecture Specification</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

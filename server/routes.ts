@@ -1260,8 +1260,8 @@ router.get(
   }
 );
 
-// GET /admin/departments
-router.get('/admin/departments', (_req: Request, res: Response) => {
+// GET /departments (Public list of institutional departments and categories)
+router.get(['/departments', '/admin/departments'], (_req: Request, res: Response) => {
   const data = db.read();
   res.json(data.departments);
 });

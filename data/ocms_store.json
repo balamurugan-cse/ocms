@@ -93,10 +93,77 @@
       "status": "active",
       "createdAt": "2026-10-12T03:44:01.104Z",
       "updatedAt": "2026-10-12T03:44:01.104Z"
+    },
+    {
+      "id": "usr-1792641944735-wj0qt",
+      "name": "Test Student",
+      "email": "teststudent20261022@dmice.ac.in",
+      "passwordHash": "$2b$10$6bSzzcyW.ryidkBc1zmavOHoEA.dG4DhSaNsS06M1qKtbflIuyggm",
+      "role": "student",
+      "departmentName": "Computer Science and Engineering",
+      "rollNumber": "21052421099",
+      "phone": "+91 9876543210",
+      "emailVerifiedAt": null,
+      "verificationTokenHash": "f997f265d1f2c7569c6f606e9ea417c41bf06f05ece8e5c1ce59a3dead185afa",
+      "verificationExpiresAt": "2026-10-22T04:25:44.735Z",
+      "status": "active",
+      "createdAt": "2026-10-22T04:05:44.735Z",
+      "updatedAt": "2026-10-22T04:05:44.735Z"
     }
   ],
-  "complaints": [],
-  "complaint_events": [],
+  "complaints": [
+    {
+      "id": "cmp-1792641880953-3imur",
+      "complaintNumber": "DMI-CMP-2026-1001",
+      "createdBy": "usr-student-demo",
+      "complainantName": "Engineering Student",
+      "complainantEmail": "student@dmice.ac.in",
+      "complainantRole": "student",
+      "isAnonymous": false,
+      "category": "Lab Systems & Hardware",
+      "subject": "Laboratory 3 workstation not turning on",
+      "description": "System 14 in CSE Lab 3 is completely unresponsive when pressing the power button.",
+      "departmentId": "dept-cse",
+      "departmentName": "Computer Science and Engineering",
+      "assignedTo": null,
+      "assignedOfficerName": null,
+      "priority": "medium",
+      "status": "acknowledged",
+      "attachments": [],
+      "preferredContact": "email",
+      "slaHours": 24,
+      "dueAt": "2026-10-23T04:04:40.952Z",
+      "version": 2,
+      "createdAt": "2026-10-22T04:04:40.952Z",
+      "updatedAt": "2026-10-22T04:06:31.943Z"
+    }
+  ],
+  "complaint_events": [
+    {
+      "id": "evt-1792641880953",
+      "complaintId": "cmp-1792641880953-3imur",
+      "actorId": "usr-student-demo",
+      "actorName": "Engineering Student",
+      "actorRole": "student",
+      "eventType": "created",
+      "fromStatus": null,
+      "toStatus": "submitted",
+      "publicMessage": "Complaint filed in category \"Lab Systems & Hardware\" with MEDIUM urgency.",
+      "createdAt": "2026-10-22T04:04:40.952Z"
+    },
+    {
+      "id": "evt-1792641991943",
+      "complaintId": "cmp-1792641880953-3imur",
+      "actorId": "usr-admin",
+      "actorName": "Dr. V. Suresh Kumar (HOD CSE & Grievance Admin)",
+      "actorRole": "admin",
+      "eventType": "status_changed",
+      "fromStatus": "submitted",
+      "toStatus": "acknowledged",
+      "publicMessage": "Grievance verified by HOD",
+      "createdAt": "2026-10-22T04:06:31.943Z"
+    }
+  ],
   "departments": [
     {
       "id": "dept-cse",
@@ -197,6 +264,126 @@
   ],
   "audit_logs": [
     {
+      "id": "aud-1792642230457-mdyz",
+      "actorId": "usr-student-demo",
+      "actorName": "Engineering Student",
+      "actorRole": "student",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-student-demo",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:10:30.457Z"
+    },
+    {
+      "id": "aud-1792641991943-ko1c",
+      "actorId": "usr-admin",
+      "actorName": "Dr. V. Suresh Kumar (HOD CSE & Grievance Admin)",
+      "actorRole": "admin",
+      "action": "STATUS_CHANGE",
+      "targetType": "complaint",
+      "targetId": "cmp-1792641880953-3imur",
+      "details": "Status transitioned from submitted to acknowledged. Reason: Grievance verified by HOD",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:06:31.943Z"
+    },
+    {
+      "id": "aud-1792641991939-4hsp",
+      "actorId": "usr-admin",
+      "actorName": "Dr. V. Suresh Kumar (HOD CSE & Grievance Admin)",
+      "actorRole": "admin",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-admin",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:06:31.939Z"
+    },
+    {
+      "id": "aud-1792641986678-zzn7",
+      "actorId": "usr-admin",
+      "actorName": "Dr. V. Suresh Kumar (HOD CSE & Grievance Admin)",
+      "actorRole": "admin",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-admin",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:06:26.678Z"
+    },
+    {
+      "id": "aud-1792641944735-lw8v",
+      "actorId": "usr-1792641944735-wj0qt",
+      "actorName": "Test Student",
+      "actorRole": "student",
+      "action": "USER_REGISTERED",
+      "targetType": "user",
+      "targetId": "usr-1792641944735-wj0qt",
+      "details": "User registration created as unverified (student).",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:05:44.735Z"
+    },
+    {
+      "id": "aud-1792641880953-q403",
+      "actorId": "usr-student-demo",
+      "actorName": "Engineering Student",
+      "actorRole": "student",
+      "action": "COMPLAINT_CREATED",
+      "targetType": "complaint",
+      "targetId": "cmp-1792641880953-3imur",
+      "details": "Complaint DMI-CMP-2026-1001 created under Computer Science and Engineering. Anonymous: false",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:04:40.953Z"
+    },
+    {
+      "id": "aud-1792641880946-t11w",
+      "actorId": "usr-student-demo",
+      "actorName": "Engineering Student",
+      "actorRole": "student",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-student-demo",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:04:40.946Z"
+    },
+    {
+      "id": "aud-1792641825034-m07h",
+      "actorId": "usr-admin",
+      "actorName": "Dr. V. Suresh Kumar (HOD CSE & Grievance Admin)",
+      "actorRole": "admin",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-admin",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:03:45.034Z"
+    },
+    {
+      "id": "aud-1792641824931-4up2",
+      "actorId": "usr-student-demo",
+      "actorName": "Engineering Student",
+      "actorRole": "student",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-student-demo",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:03:44.931Z"
+    },
+    {
+      "id": "aud-1792641815745-lalt",
+      "actorId": "usr-student-demo",
+      "actorName": "Engineering Student",
+      "actorRole": "student",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-student-demo",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:03:35.745Z"
+    },
+    {
       "id": "aud-1",
       "actorId": "usr-superadmin",
       "actorName": "Dr. Anthony Xavier",
@@ -209,7 +396,32 @@
       "timestamp": "2026-10-12T04:30:00.000Z"
     }
   ],
-  "notifications": [],
+  "notifications": [
+    {
+      "id": "notif-1792641991943-4479",
+      "userId": "usr-student-demo",
+      "complaintId": "cmp-1792641880953-3imur",
+      "title": "Status Changed: DMI-CMP-2026-1001",
+      "message": "Your grievance has been moved to ACKNOWLEDGED: \"Grievance verified by HOD\"",
+      "type": "status_update",
+      "read": false,
+      "channel": "in_app",
+      "deliveryStatus": "delivered",
+      "createdAt": "2026-10-22T04:06:31.943Z"
+    },
+    {
+      "id": "notif-1792641880993-t8s0",
+      "userId": "usr-student-demo",
+      "complaintId": "cmp-1792641880953-3imur",
+      "title": "Grievance Registered: DMI-CMP-2026-1001",
+      "message": "Your complaint regarding \"Laboratory 3 workstation not turning on\" has been lodged successfully with expected SLA resolution by 10/23/2026.",
+      "type": "info",
+      "read": false,
+      "channel": "in_app",
+      "deliveryStatus": "delivered",
+      "createdAt": "2026-10-22T04:04:40.993Z"
+    }
+  ],
   "settings": {
     "institutionName": "DMI College of Engineering",
     "campusLocation": "Palanchur, Chennai - 600 123, Tamil Nadu, India",
@@ -221,5 +433,5 @@
     "allowAnonymousComplaints": true,
     "reopenAllowedDays": 7
   },
-  "counter": 1001
+  "counter": 1002
 }

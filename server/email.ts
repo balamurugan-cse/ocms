@@ -23,27 +23,44 @@ export const emailDeliveryJournal: EmailDispatchRecord[] = [];
  */
 function getSmtpTransporter() {
   const host = process.env.SMTP_HOST;
-  const port = parseInt(process.env.SMTP_PORT || '587', 10);
+  const portStr = process.env.SMTP_PORT || '587';
+  const port = parseInt(portStr, 10);
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
 
-  // Check if SMTP is configured (not default placeholder)
-  if (!host || !user || !pass || host === 'YOUR_REAL_SMTP_HOST' || user.includes('YOUR_VERIFIED')) {
+  // Check if SMTP is valid (ignore dummy container values like 123456 and enforce valid port range 1-65535)
+  if (
+    !host ||
+    !user ||
+    !pass ||
+    host === 'YOUR_REAL_SMTP_HOST' ||
+    host === '123456' ||
+    user === '123456' ||
+    user.includes('YOUR_VERIFIED') ||
+    isNaN(port) ||
+    port < 1 ||
+    port > 65535
+  ) {
     return null;
   }
 
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465,
-    auth: {
-      user,
-      pass
-    },
-    tls: {
-      rejectUnauthorized: process.env.NODE_ENV === 'production'
-    }
-  });
+  try {
+    return nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: {
+        user,
+        pass
+      },
+      tls: {
+        rejectUnauthorized: process.env.NODE_ENV === 'production'
+      }
+    });
+  } catch (err) {
+    console.warn('[SMTP] Transporter creation failed, falling back to outbox:', err);
+    return null;
+  }
 }
 
 /**

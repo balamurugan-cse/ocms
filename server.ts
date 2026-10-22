@@ -26,16 +26,25 @@ app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 app.use(cookieParser());
 
-// Mount API versioned under /api/v1
+// Mount API versioned under /api/v1 and alias /api
 app.use('/api/v1', apiRouter);
+app.use('/api', apiRouter);
 
 // Health check endpoint
-app.get('/api/health', (_req, res) => {
+app.get(['/api/health', '/api/v1/health', '/health'], (_req, res) => {
   res.json({
     status: 'healthy',
     service: 'DMI OCMS Backend',
     timestamp: new Date().toISOString()
   });
+});
+
+// Global API error handler
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error('[Global Server Error]', err);
+  const status = typeof err.status === 'number' ? err.status : (typeof err.statusCode === 'number' ? err.statusCode : 500);
+  const message = err.message || 'Internal server error occurred.';
+  res.status(status).json({ error: message });
 });
 
 async function startServer() {
