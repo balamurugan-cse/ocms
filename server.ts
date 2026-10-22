@@ -1,51 +1,9 @@
-import express from 'express';
 import path from 'path';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
-import apiRouter from './server/routes.js';
-import { db } from './server/db.js';
+import express from 'express';
+import app from './server/app.js';
 
-dotenv.config();
-
-const app = express();
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const isProd = process.env.NODE_ENV === 'production';
-
-// Initialize persistent database
-db.read();
-
-// Security and middleware
-app.use(
-  cors({
-    origin: true,
-    credentials: true
-  })
-);
-app.use(express.json({ limit: '15mb' }));
-app.use(express.urlencoded({ extended: true, limit: '15mb' }));
-app.use(cookieParser());
-
-// Mount API versioned under /api/v1 and alias /api
-app.use('/api/v1', apiRouter);
-app.use('/api', apiRouter);
-
-// Health check endpoint
-app.get(['/api/health', '/api/v1/health', '/health'], (_req, res) => {
-  res.json({
-    status: 'healthy',
-    service: 'DMI OCMS Backend',
-    timestamp: new Date().toISOString()
-  });
-});
-
-// Global API error handler
-app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error('[Global Server Error]', err);
-  const status = typeof err.status === 'number' ? err.status : (typeof err.statusCode === 'number' ? err.statusCode : 500);
-  const message = err.message || 'Internal server error occurred.';
-  res.status(status).json({ error: message });
-});
 
 async function startServer() {
   if (!isProd) {
@@ -72,3 +30,5 @@ startServer().catch((err) => {
   console.error('[DMI OCMS] Failed to start server:', err);
   process.exit(1);
 });
+
+export default app;

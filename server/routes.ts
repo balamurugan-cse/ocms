@@ -22,13 +22,21 @@ import {
 const router = Router();
 
 // Multer storage for complaint evidence attachments
-const UPLOAD_DIR = path.resolve(process.cwd(), 'data/uploads');
+const isVercel = Boolean(process.env.VERCEL || process.env.NOW_REGION);
+const UPLOAD_DIR = isVercel
+  ? path.resolve('/tmp', 'data', 'uploads')
+  : path.resolve(process.cwd(), 'data/uploads');
+
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
-    if (!fs.existsSync(UPLOAD_DIR)) {
-      fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+    try {
+      if (!fs.existsSync(UPLOAD_DIR)) {
+        fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+      }
+      cb(null, UPLOAD_DIR);
+    } catch (err: any) {
+      cb(err, UPLOAD_DIR);
     }
-    cb(null, UPLOAD_DIR);
   },
   filename: (_req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);

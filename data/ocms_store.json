@@ -264,6 +264,18 @@
   ],
   "audit_logs": [
     {
+      "id": "aud-1792642717154-atad",
+      "actorId": "usr-superadmin",
+      "actorName": "Dr. Anthony Xavier (Super Admin)",
+      "actorRole": "super_admin",
+      "action": "USER_LOGIN",
+      "targetType": "auth",
+      "targetId": "usr-superadmin",
+      "details": "User signed in successfully.",
+      "ip": "127.0.0.1",
+      "timestamp": "2026-10-22T04:18:37.154Z"
+    },
+    {
       "id": "aud-1792642230457-mdyz",
       "actorId": "usr-student-demo",
       "actorName": "Engineering Student",

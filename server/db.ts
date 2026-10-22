@@ -163,16 +163,27 @@ interface DatabaseSchema {
   counter: number;
 }
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const isVercel = Boolean(process.env.VERCEL || process.env.NOW_REGION);
+const DATA_DIR = isVercel ? path.resolve('/tmp', 'data') : path.resolve(process.cwd(), 'data');
 const DB_FILE = path.resolve(DATA_DIR, 'ocms_store.json');
 const TEMP_FILE = path.resolve(DATA_DIR, 'ocms_store.tmp.json');
+const SEED_FILE = path.resolve(process.cwd(), 'data', 'ocms_store.json');
 
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (e) {
+  // Graceful handling on read-only environments
 }
-const UPLOAD_DIR = path.resolve(DATA_DIR, 'uploads');
-if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+
+const UPLOAD_DIR = isVercel ? path.resolve('/tmp', 'data', 'uploads') : path.resolve(DATA_DIR, 'uploads');
+try {
+  if (!fs.existsSync(UPLOAD_DIR)) {
+    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  }
+} catch (e) {
+  // Graceful handling on read-only environments
 }
 
 let dbData: DatabaseSchema | null = null;
@@ -402,18 +413,29 @@ export const db = {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
         dbData = JSON.parse(raw) as DatabaseSchema;
         return dbData;
+      } else if (fs.existsSync(SEED_FILE)) {
+        const raw = fs.readFileSync(SEED_FILE, 'utf-8');
+        dbData = JSON.parse(raw) as DatabaseSchema;
+        try {
+          this.write();
+        } catch {}
+        return dbData;
       }
     } catch (err) {
       console.error('[DB] Error reading store from disk, recreating defaults:', err);
     }
     dbData = getInitialData();
-    this.write();
+    try {
+      this.write();
+    } catch {}
     return dbData;
   },
 
   resetToClean(): void {
     dbData = getInitialData();
-    this.write();
+    try {
+      this.write();
+    } catch {}
   },
 
   write(): void {
@@ -423,11 +445,10 @@ export const db = {
       fs.writeFileSync(TEMP_FILE, serialized, 'utf-8');
       fs.renameSync(TEMP_FILE, DB_FILE);
     } catch (err) {
-      console.error('[DB] Error writing store to disk:', err);
       try {
         fs.writeFileSync(DB_FILE, JSON.stringify(dbData, null, 2), 'utf-8');
       } catch (inner) {
-        console.error('[DB] Fatal error persisting database:', inner);
+        // Safe in-memory retention if filesystem is read-only
       }
     }
   },
